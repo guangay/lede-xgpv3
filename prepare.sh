@@ -50,5 +50,5 @@ if [ -d "package/zz/xgp-v3-screen" ]; then
     git pull || { echo "xgp-v3-screen git pull failed"; exit 1; }
     cd ../../..
 else
-    git clone https://github.com/zzzz0317/xgp-v3-screen.git package/zz/xgp-v3-screen || { echo "xgp-v3-screen git clone failed"; exit 1; }
+    git clone https://github.com/junhong-l/xgp-v3-screen.git package/zz/xgp-v3-screen || { echo "xgp-v3-screen git clone failed"; exit 1; }
 fi
