@@ -1,11 +1,11 @@
 #!/bin/sh
 is_first_boot=`uci -q get zz_config.@status[0].first_boot`
 if test $is_first_boot -gt 0; then
-#echo -e "xgpxgpxgp\nxgpxgpxgp" | (passwd root)
-uci set system.@system[0].hostname='zzXGP'
+#echo -e "qweasd\nqweasd" | (passwd root)
+uci set system.@system[0].hostname='XGPV3'
 uci commit system
 uci del dhcp.lan.ra_slaac
-uci set network.lan.ipaddr='10.0.0.1'
+uci set network.lan.ipaddr='10.10.10.1'
 uci add_list network.lan.ip6class='mpcie1v6'
 uci add_list network.lan.ip6class='mpcie2v6'
 uci add_list network.lan.ip6class='wwanv6'
@@ -26,12 +26,12 @@ uci set qmodem.main.enable_usb_scan='1'
 uci commit
 /etc/init.d/network reload
 uci set wireless.radio0.cell_density='0'
-uci set wireless.default_radio0.ssid='zzXGP'
+uci set wireless.default_radio0.ssid='XGP'
 uci set wireless.default_radio0.encryption='psk2+ccmp'
-uci set wireless.default_radio0.key='xgpxgpxgp'
-uci set wireless.default_radio1.ssid='zzXGP'
+uci set wireless.default_radio0.key='88888889'
+uci set wireless.default_radio1.ssid='XGP-5G'
 uci set wireless.default_radio1.encryption='psk2+ccmp'
-uci set wireless.default_radio1.key='xgpxgpxgp'
+uci set wireless.default_radio1.key='88888889'
 uci commit wireless
 /etc/init.d/network reload
 wifi
