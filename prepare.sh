@@ -14,6 +14,7 @@ else
     echo "repo dir not exists"
     git clone "https://github.com/coolsnowwolf/lede.git" || { echo "git clone failed"; exit 1; }
     cd lede
+    echo "CONFIG_DRM_SHMEM_HELPER=y" >> target/linux/rockchip/armv8/config-6.12
 fi
 
 cat feeds.conf.default > feeds.conf
