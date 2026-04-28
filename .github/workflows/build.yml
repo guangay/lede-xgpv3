@@ -91,7 +91,7 @@ jobs:
         run: |
           mkdir -p release_assets
           cp lede/bin/targets/rockchip/armv8/*.img.gz release_assets/ || true
-          cp lede/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-nlnet_xiguapi-v3.manifest release_assets/ || true
+          cp lede/bin/targets/rockchip/armv8/*.manifest release_assets/ || true
           cp lede/bin/targets/rockchip/armv8/config.buildinfo release_assets/ || true
           cp lede/bin/targets/rockchip/armv8/feeds.buildinfo release_assets/ || true
           cp lede/bin/targets/rockchip/armv8/profiles.json release_assets/ || true
@@ -167,7 +167,7 @@ jobs:
           echo "<summary>内置软件包列表</summary>" >> release_info.md
           echo "" >> release_info.md
           echo "\`\`\`" >> release_info.md
-          cat release_assets/openwrt-rockchip-armv8-nlnet_xiguapi-v3.manifest >> release_info.md
+          cat release_assets/*.manifest >> release_info.md
           echo "\`\`\`" >> release_info.md
           echo "" >> release_info.md
           echo "</details>" >> release_info.md
@@ -185,7 +185,7 @@ jobs:
           git push origin ${{ steps.release-prepare.outputs.new_tag }}
       - name: Rename image
         run: |
-          mv release_assets/openwrt-rockchip-armv8-nlnet_xiguapi-v3-squashfs-sysupgrade.img.gz release_assets/${{ steps.release-prepare.outputs.IMAGE_PREFIX }}squashfs-sysupgrade.img.gz
+          mv release_assets/*-squashfs-sysupgrade.img.gz release_assets/${{ steps.release-prepare.outputs.IMAGE_PREFIX }}squashfs-sysupgrade.img.gz
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
@@ -195,7 +195,7 @@ jobs:
           body_path: release_info.md
           files: |
             release_assets/*.img.gz
-            release_assets/openwrt-rockchip-armv8-nlnet_xiguapi-v3.manifest
+            release_assets/*.manifest
             release_assets/config.buildinfo
             release_assets/feeds.buildinfo
             release_assets/profiles.json
