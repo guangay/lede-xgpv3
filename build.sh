@@ -6,6 +6,8 @@ echo "install feeds"
 ./scripts/feeds install -a || { echo "install feeds failed"; exit 1; }
 ./scripts/feeds install -a -f -p qmodem || { echo "install qmodem feeds failed"; exit 1; }
 cat ../xgp.config > .config
+echo "CONFIG_PACKAGE_kmod-drm-shmem-helper=y" >> .config
+echo "CONFIG_PACKAGE_kmod-drm-panfrost=y" >> .config
 echo "make defconfig"
 make defconfig || { echo "defconfig failed"; exit 1; }
 echo "diff initial config and new config:"
