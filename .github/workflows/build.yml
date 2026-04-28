@@ -35,7 +35,7 @@ jobs:
           remove-haskell: 'true'
           remove-codeql: 'true'
           remove-docker-images: 'true'
-            - name: Force cleanup more space
+      - name: Force cleanup more space
         run: |
           echo "=== 清理前根分区使用情况 ==="
           df -h /
@@ -55,7 +55,6 @@ jobs:
           sudo apt-get clean
           echo "=== 清理后根分区使用情况 ==="
           df -h /
-
       - name: Move temporary files to build mount
         run: |
           # 将 /tmp 绑定到工作区所在的卷上，防止根分区被临时文件占满
