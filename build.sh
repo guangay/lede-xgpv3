@@ -5,6 +5,8 @@ echo "update feeds"
 echo "install feeds"
 ./scripts/feeds install -a || { echo "install feeds failed"; exit 1; }
 ./scripts/feeds install -a -f -p qmodem || { echo "install qmodem feeds failed"; exit 1; }
+cat ../xgp.config > .config
+echo "make defconfig"
 make defconfig || { echo "defconfig failed"; exit 1; }
 echo "diff initial config and new config:"
 diff ../xgp.config .config
@@ -60,5 +62,4 @@ echo "ZZ_BUILD_LEDE_HASH='$(git rev-parse HEAD)'" >> files/etc/zz_build_id
 echo "make download"
 make download -j8 || { echo "download failed"; exit 1; }
 echo "make lede"
-
-make -j1 V=sc 2>&1 | tee build.log || { echo "make failed"; exit 1; }
+make V=0 -j$(nproc) || { echo "make failed"; exit 1; }
