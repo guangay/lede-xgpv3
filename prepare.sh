@@ -7,6 +7,15 @@ cat /proc/cpuinfo
 if [ -d "lede" ]; then
     echo "repo dir exists"
     cd lede
+    echo ">>> 检查并尝试安装隐藏的 DRM 依赖包"
+# 检查 kmod-drm-shmem-helper 的 Makefile 是否存在
+if [ -f "package/kernel/linux/modules/video.mk" ] && grep -q "kmod-drm-shmem-helper" package/kernel/linux/modules/video.mk; then
+    echo "找到隐藏包 drm-shmem-helper 的定义，尝试激活。"
+    # 查找并执行 Makefile 中的 install 指令，强制使其在后续编译中可用
+    make package/kernel/linux/compile -j1 V=s 2>/dev/null || true
+else
+    echo "警告：未找到 drm-shmem-helper 的 Makefile，可能需要检查内核配置。"
+fi
     git reset --hard
     git pull || { echo "git pull failed"; exit 1; }
 else
