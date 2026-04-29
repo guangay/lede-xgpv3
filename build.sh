@@ -9,8 +9,8 @@ cat ../xgp.config > .config
 echo "make defconfig"
 make defconfig || { echo "defconfig failed"; exit 1; }
 sed -i '/^make defconfig || { echo "defconfig failed"; exit 1; }$/a\
-sed -i '"'"'/^CONFIG_DRM_SHMEM_HELPER/d'"'"' .config\
-echo '"'"'CONFIG_DRM_SHMEM_HELPER=m'"'"' >> .config' ~/lede-xgpv3/build.sh
+CONFIG_DRM_SHMEM_HELPER
+CONFIG_DRM_SHMEM_HELPER=m
 echo "diff initial config and new config:"
 diff ../xgp.config .config
 echo "diff initial config and new config (from old config only):"
