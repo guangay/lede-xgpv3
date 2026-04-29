@@ -20,6 +20,8 @@ cat feeds.conf.default > feeds.conf
 echo "" >> feeds.conf
 echo "src-git qmodem https://github.com/FUjr/QModem.git;main" >> feeds.conf
 #echo "src-git qmodem https://github.com/zzzz0317/QModem.git;stable202508" >> feeds.conf
+echo "src-git nas https://github.com/linkease/nas-packages.git;master" >> feeds.conf
+echo "src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main" >> feeds.conf
 rm -rf files
 cp -r ../files .
 if [ -d "package/zz/luci-app-argon-config" ]; then
@@ -36,17 +38,10 @@ if [ -d "package/zz/luci-theme-alpha" ]; then
 else
     git clone https://github.com/derisamedia/luci-theme-alpha.git package/zz/luci-theme-alpha || { echo "luci-theme-alpha git clone failed"; exit 1; }
 fi
-if [ -d "package/zz/kmod-fb-tft-gc9307" ]; then
-    cd package/zz/kmod-fb-tft-gc9307
-    git pull || { echo "kmod-fb-tft-gc9307 git pull failed"; exit 1; }
-    cd ../../..
-else
-    git clone https://github.com/zzzz0317/kmod-fb-tft-gc9307.git package/zz/kmod-fb-tft-gc9307 || { echo "kmod-fb-tft-gc9307 git clone failed"; exit 1; }
-fi
 if [ -d "package/zz/xgp-v3-screen" ]; then
     cd package/zz/xgp-v3-screen
     git pull || { echo "xgp-v3-screen git pull failed"; exit 1; }
     cd ../../..
 else
-    git clone https://github.com/zzzz0317/xgp-v3-screen.git package/zz/xgp-v3-screen || { echo "xgp-v3-screen git clone failed"; exit 1; }
+    git clone https://github.com/junhong-l/xgp-v3-screen.git || { echo "xgp-v3-screen git clone failed"; exit 1; }
 fi
