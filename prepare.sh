@@ -19,6 +19,9 @@ fi
 # 修复 DRM_SHMEM_HELPER 缺失，必须以模块方式编译
 sed -i '/^CONFIG_DRM_SHMEM_HELPER/d' target/linux/rockchip/armv8/config-6.12
 echo 'CONFIG_DRM_SHMEM_HELPER=m' >> target/linux/rockchip/armv8/config-6.12
+# 修复 kmod-drm-panfrost 依赖 drm_shmem_helper.ko 的问题（OpenWrt 6.12 内核 BUG）
+sed -i 's|FILES:=\$(LINUX_DIR)/drivers/gpu/drm/panfrost/panfrost.ko|FILES:=\$(LINUX_DIR)/drivers/gpu/drm/panfrost/panfrost.ko \$(LINUX_DIR)/drivers/gpu/drm/drm_shmem_helper.ko|g' package/kernel/linux/modules/video.mk
+
 
 cat feeds.conf.default > feeds.conf
 echo "" >> feeds.conf
