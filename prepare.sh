@@ -20,7 +20,8 @@ fi
 sed -i '/^CONFIG_DRM_SHMEM_HELPER/d' target/linux/rockchip/armv8/config-6.12
 echo 'CONFIG_DRM_SHMEM_HELPER=m' >> target/linux/rockchip/armv8/config-6.12
 # 修复 kmod-drm-panfrost 依赖 drm_shmem_helper.ko 的问题（OpenWrt 6.12 内核 BUG）
-sed -i 's|FILES:=\$(LINUX_DIR)/drivers/gpu/drm/panfrost/panfrost.ko|FILES:=\$(LINUX_DIR)/drivers/gpu/drm/panfrost/panfrost.ko \$(LINUX_DIR)/drivers/gpu/drm/drm_shmem_helper.ko|g' package/kernel/linux/modules/video.mk
+sed -i '679s/.*/  FILES:=$(LINUX_DIR)\/drivers\/gpu\/drm\/panfrost\/panfrost.ko $(LINUX_DIR)\/drivers\/gpu\/drm\/drm_shmem_helper.ko $(LINUX_DIR)\/drivers\/gpu\/drm\/drm_kms_helper.ko $(LINUX_DIR)\/drivers\/video\/fbdev\/core\/fb_sys_fops.ko $(LINUX_DIR)\/drivers\/video\/fbdev\/core\/syscopyarea.ko $(LINUX_DIR)\/drivers\/video\/fbdev\/core\/sysfillrect.ko $(LINUX_DIR)\/drivers\/video\/fbdev\/core\/sysimgblt.ko/' ~/lede-xgpv3/lede/package/kernel/linux/modules/video.mk
+
 
 
 cat feeds.conf.default > feeds.conf
